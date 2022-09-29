@@ -18,6 +18,7 @@ export const authOptions = {
     })
     // ...add more providers here
   ],
+  secret:process.env.SECRET,
   adapter: FirestoreAdapter({
   apiKey: "AIzaSyAiyufszihjEAMX1IDuqtJK4tV-tsmxkQ4",
   authDomain: "devlist-62e12.firebaseapp.com",
