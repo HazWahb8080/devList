@@ -7,7 +7,7 @@ export default function SignIn({ providers }) {
     <div className="bg-gradient-to-b from-transparent to-[#FED7B8] items-center justify-start flex flex-col min-h-screen ">
       <img
         src="/devList.png"
-        className="object-center object-cover mt-12 border-b border-gray-100"
+        className="object-center object-cover mt-12"
         height={100}
         width={150}
         alt="logo"
