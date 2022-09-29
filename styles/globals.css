@@ -2,7 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-body,html{
+body,
+html {
   width: 100;
   height: 100vh;
+}
+@layer components {
+  .btn {
+    @apply px-3 py-3 bg-transparent border border-gray-900 text-gray-900 rounded-lg smooth
+     hover:bg-gray-900 hover:border-transparent hover:text-gray-100
+  }
+  .smooth{
+    @apply duration-300 ease-in-out transition-all
+  }
 }
