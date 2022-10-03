@@ -23,7 +23,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "tailwind.config.js"  ],
+, "tailwind.config.js", "pages/welcome.tsx", "utils/hooks/useInput.js"  ],
   "exclude": [
     "node_modules"
   ]
