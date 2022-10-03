@@ -9,10 +9,13 @@ html {
 }
 @layer components {
   .btn {
-    @apply px-3 py-3 bg-transparent border border-gray-900 text-gray-900 rounded-lg smooth
-     hover:bg-gray-900 hover:border-transparent hover:text-gray-100
+    @apply px-3 py-3 bg-transparent border border-gray-900 text-gray-900 rounded-xl smooth
+     hover:bg-gray-900 hover:border-transparent hover:text-gray-100 cursor-pointer
   }
   .smooth{
     @apply duration-300 ease-in-out transition-all
+  }
+  .input {
+    @apply py-4 px-2 bg-slate-100 rounded-xl border-gray-500 outline-none w-full my-2
   }
 }

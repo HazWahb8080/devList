@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { getProviders, signIn } from "next-auth/react";
+import { getProviders, signIn, signOut } from "next-auth/react";
 import Image from "next/image";
 import { githubIcon, googleIcon } from "../../utils/svgs";
 export default function SignIn({ providers }) {
@@ -22,7 +22,7 @@ export default function SignIn({ providers }) {
           >
             <button
               className="btn my-4 flex space-x-4"
-              onClick={() => signIn(provider.id, { callbackUrl: "/" })}
+              onClick={() => signIn(provider.id, { callbackUrl: "/welcome" })} //
             >
               <span className="self-center mx-2 ">
                 {provider.name === "Google" ? googleIcon : githubIcon}
