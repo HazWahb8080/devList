@@ -6,7 +6,7 @@ function useInput(initialValue: string) {
     setValue(e.target.value);
   const bind = {defaultValue, onChange };
 
-  return [defaultValue, onChange, bind];
+  return [defaultValue, bind];
 }
 
 export default useInput;
