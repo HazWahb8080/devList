@@ -1,28 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import React, { FormEvent, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 
-export type Inputs = {
-  firstName: string;
-  lastName: string;
-  description: string;
-  tags: string[];
-};
 function Welcome() {
   const { data: session } = useSession();
-  // handling form data
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
   const [loading, setLoading] = useState(true);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    description: "",
+    tags: [],
+  });
   useEffect(() => {
     if (!session) return;
     setLoading(false);
   }, [session]);
+
+  // handle form
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+  };
 
   if (loading) {
     <div className="w-full items-center justify-center flex bg-slate-100 min-h-screen px-2 ">
@@ -35,9 +31,41 @@ function Welcome() {
     <div className="w-full items-center justify-center flex bg-slate-100 min-h-screen px-2 ">
       <div className="w-full lg:w-[45%] border border-black rounded-xl items-start justify-start flex flex-col bg-white py-24 px-4">
         <form
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={(e) => handleSubmit(e)}
           className="w-full place-items-center grid grid-cols-2 gap-4"
-        ></form>
+        >
+          <label className="w-full">
+            First Name
+            <input
+              className="input"
+              defaultValue={session?.user?.name.split(" ")[0]}
+              onChange={(e) => {
+                setFormData({ ...formData, firstName: e.target.value });
+              }}
+            />
+          </label>
+          <label className="w-full">
+            Last Name
+            <input
+              className="input"
+              defaultValue={session?.user?.name.split(" ")[1]}
+              onChange={(e) => {
+                setFormData({ ...formData, lastName: e.target.value });
+              }}
+            />
+          </label>
+          <label className="w-full col-span-2">
+            Description
+            <input
+              className="input"
+              value={formData.description}
+              onChange={(e) => {
+                setFormData({ ...formData, description: e.target.value });
+              }}
+            />
+          </label>
+          <input className="input col-span-2" />
+        </form>
       </div>
     </div>
   );
