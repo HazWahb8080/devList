@@ -38,7 +38,7 @@ function Welcome() {
     if (loadingForm) return;
     e.preventDefault();
     setLoadingForm(true);
-    console.log(formData);
+    console.dir(formData);
   };
 
 
@@ -120,7 +120,6 @@ function Welcome() {
             {formData.tags
               .map((tag, i) => (
                 <div
-                onClick={(i) => removeItem(i)}
                   title="remove"
                   key={tag}
                   className="tag"
