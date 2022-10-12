@@ -41,7 +41,6 @@ function Welcome() {
     console.dir(formData);
   };
 
-
   if (loading) {
     <div className="w-full items-center justify-center flex bg-slate-100 min-h-screen px-2 ">
       <div className="w-full lg:w-[75%] xl:w-[45%] rounded-xl items-start justify-start flex flex-col bg-white py-24 px-4">
@@ -50,11 +49,11 @@ function Welcome() {
     </div>;
   }
   return (
-    <div className="w-full items-center justify-center flex bg-slate-100 min-h-screen px-2 ">
-      <div className="w-full lg:w-[75%] xl:w-[35%] rounded-xl items-center justify-center flex flex-col bg-white py-24 px-4 shadow-xl shadow-gray-200">
+    <div className="w-full items-center justify-center flex bg-slate-100 min-h-screen px-2 py-4 ">
+      <div className="w-full lg:w-[75%] xl:w-[35%] rounded-xl items-center justify-center flex flex-col bg-white 2xl:py-24 px-4 py-6 shadow-xl shadow-gray-200">
         <img
           src="/devList.png"
-          className="w-48 h-48 object-center object-contain"
+          className="2xl:w-48 2xl:h-48 w-36 object-center object-contain pb-6"
           alt="logo"
         />
         <form
@@ -117,21 +116,16 @@ function Welcome() {
           </select>
 
           <div className="w-full col-span-2  place-items-start gap-2 grid grid-cols-5 border-b border-gray-300 mb-6 pb-4">
-            {formData.tags
-              .map((tag, i) => (
-                <div
-                  title="remove"
-                  key={tag}
-                  className="tag"
-                >
-                  <p>{tag}</p>
-                </div>
-              ))}
+            {formData.tags.map((tag, i) => (
+              <div title="remove" key={tag} className="tag px-2">
+                <p className="text-xs">{tag}</p>
+              </div>
+            ))}
           </div>
           <button
             disabled={loadingForm}
             type="submit"
-            className="btn w-full md:w-2/3 my-4 col-span-2"
+            className="btn w-full my-4 col-span-2"
           >
             {loadingForm ? "loading.." : "submit"}
           </button>
