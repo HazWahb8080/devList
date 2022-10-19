@@ -5,6 +5,8 @@ import useInput from "../utils/hooks/useForm";
 import Router, { useRouter } from "next/router";
 import useForm from "../utils/hooks/useForm";
 import { tags } from "../utils/db";
+type Tag = string;
+type Tags = Tag[];
 
 function Welcome() {
   const { data: session, status } = useSession();
@@ -38,7 +40,10 @@ function Welcome() {
     if (loadingForm) return;
     e.preventDefault();
     setLoadingForm(true);
-    console.dir(formData);
+  };
+  const [removeTag, setRemoveTag] = useState<Tags>([]);
+  const restoreItem = (el: string) => {
+    setRemoveTag(removeTag.filter((item) => item !== el));
   };
 
   if (loading) {
@@ -49,7 +54,7 @@ function Welcome() {
     </div>;
   }
   return (
-    <div className="w-full items-center justify-center flex bg-slate-100 min-h-screen px-2 py-4 ">
+    <div className="w-full items-center justify-center flex bg-white min-h-screen px-2 py-4 ">
       <div className="w-full lg:w-[75%] xl:w-[35%] rounded-xl items-center justify-center flex flex-col bg-white 2xl:py-24 px-4 py-6 shadow-xl shadow-gray-200">
         <img
           src="/devList.png"
@@ -100,10 +105,12 @@ function Welcome() {
             name="tags"
             ref={selectRef}
             className="outline-none col-span-2"
-            onChange={(e) =>
-              formData.tags.filter((tag) => tag === e.target.value).length ===
-                0 && handleChange(e)
-            }
+            onChange={(e) => {
+              removeTag.some((item) => item === e.target.value)
+                ? restoreItem(e.target.value)
+                : formData.tags.filter((tag) => tag === e.target.value)
+                    .length === 0 && handleChange(e);
+            }}
           >
             <option value="" hidden selected disabled>
               choose skills, roles, tools
@@ -115,12 +122,21 @@ function Welcome() {
             ))}
           </select>
 
-          <div className="w-full col-span-2  place-items-start gap-2 grid grid-cols-5 border-b border-gray-300 mb-6 pb-4">
-            {formData.tags.map((tag, i) => (
-              <div title="remove" key={tag} className="tag px-2">
-                <p className="text-xs">{tag}</p>
-              </div>
-            ))}
+          <div className="w-full col-span-2  place-items-start gap-2 grid grid-cols-3 border-b border-gray-300 mb-6 pb-4">
+            {formData.tags
+              .filter(
+                (tag, i, arr) => tag !== removeTag.find((item) => item === tag)
+              )
+              .map((tag, i) => (
+                <div
+                  onClick={() => setRemoveTag([...removeTag, tag])}
+                  title="remove"
+                  key={tag}
+                  className="tag"
+                >
+                  <p className="text-xs">{tag}</p>
+                </div>
+              ))}
           </div>
           <button
             disabled={loadingForm}
