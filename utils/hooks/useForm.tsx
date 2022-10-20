@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ReactElement, Ref, useState } from "react";
 
 interface formInputs {
   firstName: string;
@@ -7,7 +7,7 @@ interface formInputs {
   tags: string[];
 }
 
-function useForm(initialValue = {} as formInputs) {
+function useForm(initialValue = {} as formInputs , ref:React.RefObject<HTMLSelectElement>) {
   const [formData, setFormData] = useState(initialValue);
   const handleChange = (
     e: React.ChangeEvent<
@@ -15,10 +15,11 @@ function useForm(initialValue = {} as formInputs) {
     >
   ) => {
     e.target.name === "tags"
-      ? setFormData((curr) => ({
+      ? (setFormData((curr) => ({
           ...curr,
           [e.target.name]: [...curr.tags, e.target.value],
-        }))
+        })),
+       ref.current.value === "")
       : setFormData((curr) => ({ ...curr, [e.target.name]: e.target.value }));
   };
   return { formData, handleChange };

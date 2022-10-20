@@ -14,12 +14,13 @@ function Welcome() {
   const router = useRouter();
   const [loadingForm, setLoadingForm] = useState(false);
   const [Error, setError] = useState([{ name: "", message: "" }]);
+  const selectRef = useRef(null);
   const { formData, handleChange } = useForm({
     firstName: session?.user?.name.split(" ")[0],
     lastName: session?.user?.name.split(" ")[1],
     description: "",
     tags: [],
-  });
+  },selectRef);
   useEffect(() => {
     if (!session) return;
     setLoading(false);
@@ -27,7 +28,6 @@ function Welcome() {
   }, [session]);
 
   // error handling
-  const selectRef = useRef(null);
   const tagsRef = useRef(null);
   let fields = [
     { field: "firstName", value: formData.firstName },
@@ -103,6 +103,7 @@ function Welcome() {
           </label>
           <select
             name="tags"
+            value=""
             ref={selectRef}
             className="outline-none col-span-2"
             onChange={(e) => {
@@ -112,7 +113,7 @@ function Welcome() {
                     .length === 0 && handleChange(e);
             }}
           >
-            <option value="" hidden selected disabled>
+            <option value="" defaultChecked selected disabled>
               choose skills, roles, tools
             </option>
             {tags.map((tag) => (
@@ -125,9 +126,9 @@ function Welcome() {
           <div className="w-full col-span-2  place-items-start gap-2 grid grid-cols-3 border-b border-gray-300 mb-6 pb-4">
             {formData.tags
               .filter(
-                (tag, i, arr) => tag !== removeTag.find((item) => item === tag)
+                (tag) => tag !== removeTag.find((item) => item === tag)
               )
-              .map((tag, i) => (
+              .map((tag) => (
                 <div
                   onClick={() => setRemoveTag([...removeTag, tag])}
                   title="remove"
