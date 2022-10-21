@@ -4,6 +4,9 @@ import Image from "next/image";
 
 function GeneralSection({ session }) {
   const { result, loading } = useFetch("user");
+  //fetching the user data once and then store it in the global state to access it anywhere
+  //so we fetch the data only once.
+
   const handleName = () => {
     return (
       result.firstName[0].toUpperCase() +
@@ -16,7 +19,7 @@ function GeneralSection({ session }) {
 
   if (loading) {
     return (
-      <div className="w-full flex flex-col items-start justify-start">
+      <div className="w-full h-full min-h-screen flex flex-col items-center justify-center">
         <h1> loading...! </h1>
       </div>
     );
