@@ -4,7 +4,7 @@ import { BellIcon } from "@heroicons/react/24/outline";
 
 function Header({ session }) {
   return (
-    <header className="w-full py-2 px-4 items-start justify-between flex sticky top-0 shadow-sm shadow-gray-100">
+    <header className=" z-50 bg-white w-full py-2 px-4 items-start justify-between flex sticky top-0 shadow-sm shadow-gray-100">
       <Image
         src="/devList.png"
         width={100}
