@@ -5,8 +5,9 @@ import useInput from "../utils/hooks/useForm";
 import Router, { useRouter } from "next/router";
 import useForm from "../utils/hooks/useForm";
 import { tags } from "../utils/db";
-import {setDoc,doc} from "firebase/firestore"
-import {db} from "../firebase"
+import { setDoc, doc } from "firebase/firestore";
+import { db } from "../firebase";
+import { CheckIcon } from "@heroicons/react/24/outline";
 type Tag = string;
 type Tags = Tag[];
 
@@ -16,20 +17,26 @@ function Welcome() {
   const router = useRouter();
   const [loadingForm, setLoadingForm] = useState(false);
   const [Error, setError] = useState([{ name: "", message: "" }]);
-  const [userName,setUserName] = useState({firstName:"",lastName:""})
-  useEffect(()=>{
-    if(!session) return;
-    setUserName({firstName:session?.user?.name.split(" ")[0],lastName:session?.user?.name.split(" ")[1]})
-  },[session])
+  const [userName, setUserName] = useState({ firstName: "", lastName: "" });
+  const [tagsDisplay, setTags] = useState(tags);
+  const newTagsRef = useRef(null);
+  useEffect(() => {
+    if (!session) return;
+    setUserName({
+      firstName: session?.user?.name.split(" ")[0],
+      lastName: session?.user?.name.split(" ")[1],
+    });
+  }, [session]);
   const selectRef = useRef(null);
-  const { formData, handleChange } = 
-  useForm({
-    firstName:"",
-    lastName:"",
-    description: "",
-    tags: [],
-  },selectRef);
-
+  const { formData, handleChange } = useForm(
+    {
+      firstName: "",
+      lastName: "",
+      description: "",
+      tags: [],
+    },
+    selectRef
+  );
 
   useEffect(() => {
     if (!session) return;
@@ -50,15 +57,15 @@ function Welcome() {
     if (loadingForm) return;
     e.preventDefault();
     setLoadingForm(true);
-    await setDoc(doc(db,"users",session?.user?.email),{
-      firstName:formData.firstName,
-      lastName:formData.lastName,
-      description:formData.description,
-      tags:formData.tags,
-      email:session?.user?.email
-    })
+    await setDoc(doc(db, "users", session?.user?.email), {
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      description: formData.description,
+      tags: formData.tags,
+      email: session?.user?.email,
+    });
     setLoadingForm(false);
-    router.push("/dash")
+    router.push("/dash");
   };
   const [removeTag, setRemoveTag] = useState<Tags>([]);
   const restoreItem = (el: string) => {
@@ -120,33 +127,47 @@ function Welcome() {
               <p className="text-red-500 text-sm">description is Required</p>
             )}
           </label>
-          <select
-            name="tags"
-            value=""
-            ref={selectRef}
-            className="outline-none col-span-2"
-            onChange={(e) => {
-              removeTag.some((item) => item === e.target.value)
-                ? restoreItem(e.target.value)
-                : formData.tags.filter((tag) => tag === e.target.value)
-                    .length === 0 && handleChange(e);
-            }}
-          >
-            <option value="" defaultChecked selected disabled>
-              choose skills, roles, tools
-            </option>
-            {tags.map((tag) => (
-              <option key={tag} value={tag}>
-                {tag}
+          <div className="w-full justify-center items-center flex col-span-2">
+            <select
+              name="tags"
+              value=""
+              ref={selectRef}
+              className="outline-none"
+              onChange={(e) => {
+                removeTag.some((item) => item === e.target.value)
+                  ? restoreItem(e.target.value)
+                  : formData.tags.filter((tag) => tag === e.target.value)
+                      .length === 0 && handleChange(e);
+              }}
+            >
+              <option value="" defaultChecked selected disabled>
+                choose skills, roles, tools
               </option>
-            ))}
-          </select>
+              {tagsDisplay.map((tag) => (
+                <option key={tag} value={tag}>
+                  {tag}
+                </option>
+              ))}
+            </select>
+            <div className="w-full items-center justify-center flex">
+              <input placeholder="add..." className="input" ref={newTagsRef} />
+              <CheckIcon
+                onClick={() =>
+                  newTagsRef.current.value.trim() !== "" &&
+                  (setTags([...tagsDisplay, newTagsRef.current.value]),
+                  (newTagsRef.current.value = ""),
+                  selectRef.current.focus())
+                }
+                className="icon cursor-pointer hover:stroke-green-500 smooth hover:scale-110"
+              >
+                add
+              </CheckIcon>
+            </div>
+          </div>
 
           <div className="w-full col-span-2  place-items-start gap-2 grid grid-cols-3 border-b border-gray-300 mb-6 pb-4">
             {formData.tags
-              .filter(
-                (tag) => tag !== removeTag.find((item) => item === tag)
-              )
+              .filter((tag) => tag !== removeTag.find((item) => item === tag))
               .map((tag) => (
                 <div
                   onClick={() => setRemoveTag([...removeTag, tag])}
