@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-interface formInputs {
+ interface User {
   firstName: string;
   lastName: string;
   description: string;
   tags: string[];
 }
 
-function useForm(initialValue : formInputs , ref:React.RefObject<HTMLSelectElement>) {
+function useForm(initialValue : User , ref:React.RefObject<HTMLSelectElement>) {
 
   const [formData, setFormData] = useState(initialValue);
   const handleChange = (

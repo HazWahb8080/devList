@@ -55,6 +55,7 @@ function Welcome() {
       lastName:formData.lastName,
       description:formData.description,
       tags:formData.tags,
+      email:session?.user?.email
     })
     setLoadingForm(false);
     router.push("/dash")

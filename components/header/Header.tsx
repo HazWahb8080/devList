@@ -4,7 +4,7 @@ import { BellIcon } from "@heroicons/react/24/outline";
 
 function Header({ session }) {
   return (
-    <header className=" z-50 bg-white w-full py-2 px-4 items-start justify-between flex sticky top-0 shadow-sm shadow-gray-100">
+    <header className="header__container">
       <Image
         src="/devList.png"
         width={100}
@@ -13,7 +13,7 @@ function Header({ session }) {
         objectFit="contain"
       />
       <div className="w-full items-center justify-end flex ">
-      <span className="bg-gray-100 rounded-full p-2 items-center justify-center flex mx-4">
+        <span className="icon__wrapper">
           <BellIcon className="icon" />
         </span>
         <Image
