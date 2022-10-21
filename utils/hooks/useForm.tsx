@@ -1,5 +1,4 @@
-import React, { ReactElement, Ref, useState } from "react";
-
+import React, { useState } from "react";
 interface formInputs {
   firstName: string;
   lastName: string;
@@ -7,7 +6,8 @@ interface formInputs {
   tags: string[];
 }
 
-function useForm(initialValue = {} as formInputs , ref:React.RefObject<HTMLSelectElement>) {
+function useForm(initialValue : formInputs , ref:React.RefObject<HTMLSelectElement>) {
+
   const [formData, setFormData] = useState(initialValue);
   const handleChange = (
     e: React.ChangeEvent<

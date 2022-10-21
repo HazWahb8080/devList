@@ -21,4 +21,7 @@ html {
   .tag {
     @apply rounded-full py-1  items-center justify-center flex bg-black text-white w-full cursor-pointer hover:bg-opacity-75;
   }
+  .icon {
+    @apply rounded-full h-7 w-7 object-cover object-center;
+  }
 }

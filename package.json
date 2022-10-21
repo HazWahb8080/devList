@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@heroicons/react": "^2.0.12",
     "@next-auth/firebase-adapter": "^1.0.1",
     "@reduxjs/toolkit": "^1.8.5",
     "@types/jest": "^28.1.1",

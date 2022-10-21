@@ -1,10 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { FormEvent, useEffect, useState, useRef } from "react";
+import React, { FormEvent, useEffect, useState, useRef, useMemo } from "react";
 import { useSession } from "next-auth/react";
 import useInput from "../utils/hooks/useForm";
 import Router, { useRouter } from "next/router";
 import useForm from "../utils/hooks/useForm";
 import { tags } from "../utils/db";
+import {setDoc,doc} from "firebase/firestore"
+import {db} from "../firebase"
 type Tag = string;
 type Tags = Tag[];
 
@@ -14,13 +16,21 @@ function Welcome() {
   const router = useRouter();
   const [loadingForm, setLoadingForm] = useState(false);
   const [Error, setError] = useState([{ name: "", message: "" }]);
+  const [userName,setUserName] = useState({firstName:"",lastName:""})
+  useEffect(()=>{
+    if(!session) return;
+    setUserName({firstName:session?.user?.name.split(" ")[0],lastName:session?.user?.name.split(" ")[1]})
+  },[session])
   const selectRef = useRef(null);
-  const { formData, handleChange } = useForm({
-    firstName: session?.user?.name.split(" ")[0],
-    lastName: session?.user?.name.split(" ")[1],
+  const { formData, handleChange } = 
+  useForm({
+    firstName:"",
+    lastName:"",
     description: "",
     tags: [],
   },selectRef);
+
+
   useEffect(() => {
     if (!session) return;
     setLoading(false);
@@ -36,10 +46,18 @@ function Welcome() {
   ];
 
   // handle form
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     if (loadingForm) return;
     e.preventDefault();
     setLoadingForm(true);
+    await setDoc(doc(db,"users",session?.user?.email),{
+      firstName:formData.firstName,
+      lastName:formData.lastName,
+      description:formData.description,
+      tags:formData.tags,
+    })
+    setLoadingForm(false);
+    router.push("/dash")
   };
   const [removeTag, setRemoveTag] = useState<Tags>([]);
   const restoreItem = (el: string) => {
