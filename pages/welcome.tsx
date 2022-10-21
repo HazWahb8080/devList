@@ -155,8 +155,7 @@ function Welcome() {
                 onClick={() =>
                   newTagsRef.current.value.trim() !== "" &&
                   (setTags([...tagsDisplay, newTagsRef.current.value]),
-                  (newTagsRef.current.value = ""),
-                  selectRef.current.focus())
+                  (newTagsRef.current.value = ""))
                 }
                 className="icon cursor-pointer hover:stroke-green-500 smooth hover:scale-110"
               >
