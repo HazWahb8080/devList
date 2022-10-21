@@ -11,7 +11,7 @@ function DashboardPage() {
       <Header session={session} />
       <div className="grid grid-cols-12 place-items-start w-full min-h-screen">
         <ProfileCompletion />
-        <MainBuilder />
+        <MainBuilder session={session} />
         <div className="col-span-1 py-2 w-full h-full"></div>
       </div>
     </main>

@@ -1,7 +1,8 @@
 import React from "react";
 import useFetch from "../../../utils/hooks/useFetch";
+import Image from "next/image";
 
-function GeneralSection() {
+function GeneralSection({ session }) {
   const { result, loading } = useFetch("user");
   const handleName = () => {
     return (
@@ -13,25 +14,45 @@ function GeneralSection() {
     );
   };
 
-  return (
-    <div className="w-full items-center justify-between py-6 px-4 flex bg-[#FAFBFC]">
-      {/* right */}
-      {loading ? (
-        <div className="w-full flex flex-col items-start justify-start">
-          <h1> loading...! </h1>
-        </div>
-      ) : (
-        <div className="w-full flex flex-col items-start justify-start">
-          <span>
-            <h1 className="text-2xl lg:text-4xl text-black pb-5">
-              {handleName()}
-            </h1>
-          </span>
+  if (loading) {
+    return (
+      <div className="w-full flex flex-col items-start justify-start">
+        <h1> loading...! </h1>
+      </div>
+    );
+  }
 
-          <h2> {result.description} </h2>
-        </div>
-      )}
+  return (
+    <div className="w-full items-center justify-between py-6 flex bg-[#FAFBFC] lg:px-12 px-1">
+      {/* right */}
+      <div className="w-full flex flex-col items-start justify-start">
+        <span className="flex w-full items-center justify-between pb-5">
+          <h1 className="text-2xl lg:text-4xl text-black ">{handleName()}</h1>
+          <button className="btn py-1">Edit profile</button>
+        </span>
+        <h2> {result.description} </h2>
+        <span className="w-2/3 space-x-4 flex items-start justify-start mt-6 pt-6 border-t border-black/10">
+          {result.tags.map((tag: string) => (
+            <div
+              key={tag}
+              className="tag bg-black/10 text-black cursor-default"
+            >
+              {tag}
+            </div>
+          ))}
+        </span>
+      </div>
       {/* left__ the Image */}
+      <span className=" w-1/3 items-center justify-end flex">
+        <Image
+          src={session?.user?.image}
+          objectFit="contain"
+          className="rounded-full"
+          height={150}
+          width={150}
+          alt={session?.user?.name}
+        />
+      </span>
     </div>
   );
 }
