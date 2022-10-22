@@ -25,7 +25,7 @@ html {
     @apply rounded-full h-7 w-7 object-cover object-center;
   }
   .header__container {
-    @apply z-50 bg-white w-full py-2 px-4 items-start justify-between
+    @apply  bg-white w-full py-2 px-4 items-start justify-between
     flex sticky top-0 shadow-sm shadow-gray-100 filter backdrop-blur-lg bg-opacity-50;
   }
   .icon__wrapper {

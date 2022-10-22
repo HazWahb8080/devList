@@ -1,5 +1,5 @@
 import { styled, keyframes } from "@stitches/react";
-import { violet, blackA, mauve, green } from "@radix-ui/colors";
+import { violet, blackA, mauve, green, gray } from "@radix-ui/colors";
 
 export const Flex = styled("div", { display: "flex" });
 export const Box = styled("div", {});
@@ -31,7 +31,7 @@ export const Fieldset = styled("fieldset", {
 
 export const Label = styled("label", {
   fontSize: 15,
-  color: violet.violet11,
+  color: gray.gray12,
   width: 90,
   textAlign: "right",
 });
@@ -47,11 +47,18 @@ export const Input = styled("input", {
   padding: "0 10px",
   fontSize: 15,
   lineHeight: 1,
-  color: violet.violet11,
-  boxShadow: `0 0 0 1px ${violet.violet7}`,
+  color: gray.gray12,
+  boxShadow: `0 0 0 1px ${gray.gray7}`,
   height: 35,
-
-  "&:focus": { boxShadow: `0 0 0 2px ${violet.violet8}` },
+  border: "1px solid transparent",
+  "&:hover": {
+    border: `1px solid ${gray.gray10}`,
+    backgroundColor: gray.gray1,
+  },
+  "&:focus": {
+    border: `1px solid ${gray.gray10}`,
+    backgroundColor: gray.gray1,
+  },
 });
 export const Button = styled("button", {
   all: "unset",
@@ -64,6 +71,7 @@ export const Button = styled("button", {
   lineHeight: 1,
   fontWeight: 500,
   height: 35,
+  cursor: "pointer",
   variants: {
     variant: {
       violet: {
@@ -78,6 +86,12 @@ export const Button = styled("button", {
         color: green.green11,
         "&:hover": { backgroundColor: green.green5 },
         "&:focus": { boxShadow: `0 0 0 2px ${green.green7}` },
+      },
+      black: {
+        backgroundColor: gray.gray12,
+        color: gray.gray1,
+        "&:hover": { backgroundColor: gray.gray8, color: gray.gray12 },
+        "&:focus": { boxShadow: `0 0 0 2px ${gray.gray7}` },
       },
     },
   },

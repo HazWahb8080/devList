@@ -26,18 +26,18 @@ function Modal({ open, setOpen, item, children }: Props) {
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent>
-        <DialogTitle className="flex space-x-2">
+        <DialogTitle className="flex">
           {item.icon}
           <p className="mx-2 self-center">{item.title}</p>
         </DialogTitle>
         <DialogDescription>{item.desc}</DialogDescription>
         <Fieldset>
           <Label htmlFor="name">username</Label>
-          <Input id="name" />
+          <Input id="name" className="smooth" />
         </Fieldset>
         <Flex css={{ marginTop: 25, justifyContent: "flex-end" }}>
           <DialogClose asChild>
-            <Button variant="green">Save changes</Button>
+            <Button variant="black">Save changes</Button>
           </DialogClose>
         </Flex>
         <DialogClose asChild>
