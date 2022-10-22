@@ -18,7 +18,7 @@ function useFetch(type = "" as string) {
       const fetchUserData = async () => {
         // we are fetching user details
         setLoading(true);
-        if (Object.values(result).some((entry) => entry !== "")) {
+        if (Object.values(result).some((value) => value !== "")) {
           // we are saying that whenever we rerender the generalSection we don't re-fetch the
           // data again and again. once it is fetched once and stored we get it.
           const userDetails = await getDoc(

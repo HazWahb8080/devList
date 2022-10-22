@@ -19,7 +19,7 @@ html {
     @apply py-2 px-2 bg-white border border-gray-200 rounded-md hover:border-black w-full my-2 smooth outline-none;
   }
   .tag {
-    @apply rounded-full py-1  items-center justify-center flex bg-black text-white w-full cursor-pointer hover:bg-opacity-75;
+    @apply rounded-full py-1 px-1  items-center justify-center flex bg-black text-white w-full cursor-pointer hover:bg-opacity-75;
   }
   .icon {
     @apply rounded-full h-7 w-7 object-cover object-center;
@@ -30,5 +30,18 @@ html {
   }
   .icon__wrapper {
     @apply bg-gray-100 rounded-full p-2 items-center justify-center flex mx-4;
+  }
+  .tab {
+    @apply px-2 py-1 cursor-pointer hover:border-black border-b-2 border-transparent smooth;
+  }
+  .tab--active {
+    @apply tab  border-black;
+  }
+  .portfolio__integrationGrid_wrapper {
+    @apply grid grid-cols-1 lg:grid-cols-3 gap-3 w-full py-6 px-4;
+  }
+  .portfolio__integrations__item_wrapper {
+    @apply smooth cursor-pointer duration-150 py-4 w-full items-center justify-center space-x-2 flex px-2 border
+     border-black/10 hover:border-black/50 rounded-md hover:shadow-lg shadow-gray-200;
   }
 }

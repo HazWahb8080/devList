@@ -26,7 +26,7 @@ function GeneralSection({ session }) {
   }
 
   return (
-    <div className="w-full items-center justify-between py-6 flex bg-[#FAFBFC] lg:px-12 px-1">
+    <div className="w-full items-center justify-between py-6 flex bg-white lg:px-12 px-1">
       {/* right */}
       <div className="w-full flex flex-col items-start justify-start">
         <span className="flex w-full items-center justify-between pb-5">

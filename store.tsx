@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userDetailsReducer from "./slices/userDetailsSlice";
+import activeTabReducer from "./slices/activeTab"
 
 export const store = configureStore({
   reducer: {
     userDetails: userDetailsReducer,
+    activeTab:activeTabReducer
   },
 });
 
