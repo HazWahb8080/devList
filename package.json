@@ -9,12 +9,18 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "-": "^0.0.1",
     "@heroicons/react": "^2.0.12",
     "@next-auth/firebase-adapter": "^1.0.1",
+    "@radix-ui/colors": "^0.1.8",
+    "@radix-ui/react-dialog": "^1.0.2",
+    "@radix-ui/react-icons": "^1.1.1",
     "@reduxjs/toolkit": "^1.8.5",
+    "@stitches/react": "^1.2.8",
     "@types/jest": "^28.1.1",
     "@types/node": "^17.0.41",
     "@types/react-dom": "^18.0.5",
+    "f": "^1.4.0",
     "firebase": "^9.10.0",
     "next": "12.1.6",
     "next-auth": "^4.10.3",
