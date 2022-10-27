@@ -15,6 +15,7 @@ export default function Integration() {
     const codeData = {
       code,
     };
+    // sending the code to get the accesstoken and perform further actions
     fetch(`/api/integrations/${integration}`, {
       method: "post",
       headers: {
@@ -31,12 +32,13 @@ export default function Integration() {
     await setDoc(doc(docRef, `${integration}`), {
       data: data.result,
     });
-    data.RepoResponse.forEach(async (repo: any) => {
-      await addDoc(collection(docRef, `${integration}`, "repos"), {
-        [repo.name]: repo,
+    if (integration === "github") {
+      data.RepoResponse.forEach(async (repo: any) => {
+        await addDoc(collection(docRef, `${integration}`, "repos"), {
+          [repo.name]: repo,
+        });
       });
-    });
-
+    }
     console.log("connected", integration);
     router.push("/dash");
   };
