@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
 import Header from "../components/header/Header";
 import { useSession } from "next-auth/react";
