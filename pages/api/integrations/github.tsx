@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 // we are using github aouth App istead of using public github APIs :
-// compliance issues and mainly to make it maintanable at scale in case we need to perform 
+// compliance issues and mainly to make it maintanable at scale in case we need to perform
 // more actions.
 
 export default async function handler(
@@ -28,7 +28,15 @@ export default async function handler(
       },
     });
     const result = await userData.json();
-    return res.status(200).send(result);
+    const Repos = await fetch("https://api.github.com/user/repos", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${response.access_token}`,
+        Accept: "application/vnd.github+json",
+      },
+    });
+    const RepoResponse = await Repos.json();
+    return res.status(200).send({ result, RepoResponse });
   } catch (err) {
     return res.status(500).send(err.messge);
   }
