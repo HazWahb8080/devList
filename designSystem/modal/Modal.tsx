@@ -10,9 +10,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./PrimitiveModal";
+import Link from "next/link";
 
 import { Cross2Icon } from "@radix-ui/react-icons";
 import { Input, Label, Fieldset, Button, Flex, IconButton } from "../styles";
+import { useFetchData } from "../../utils/hooks/useFetchData";
 
 interface Props {
   open: boolean;
@@ -22,6 +24,11 @@ interface Props {
 }
 
 function Modal({ open, setOpen, item, children }: Props) {
+  // custom hook that receives the type of integration
+  // do the fetching and get the result.
+
+  const { result, loading, getData } = useFetchData(item.title);
+
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
@@ -37,7 +44,9 @@ function Modal({ open, setOpen, item, children }: Props) {
         </Fieldset>
         <Flex css={{ marginTop: 25, justifyContent: "flex-end" }}>
           <DialogClose asChild>
-            <Button variant="black">Save changes</Button>
+            <Button disabled={loading} variant="black">
+              {loading ? "loading ... " : `link to ${item.title}`}
+            </Button>
           </DialogClose>
         </Flex>
         <DialogClose asChild>

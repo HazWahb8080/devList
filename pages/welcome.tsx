@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 import React, { FormEvent, useEffect, useState, useRef, useMemo } from "react";
 import { useSession } from "next-auth/react";
