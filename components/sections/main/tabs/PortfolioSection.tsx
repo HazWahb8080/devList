@@ -3,12 +3,16 @@ import Modal from "../../../../designSystem/modal/Modal";
 import { Integrations } from "../../../../utils/db";
 import { useRouter } from "next/router";
 import { CheckIntegrationLinked } from "../../../../utils/CheckIntegrationLinked";
+import GITHUB from "../../../integrations/GITHUB";
 
 function PortfolioSection() {
   // checking what integrations linked.
   const { integrationsLinked } = CheckIntegrationLinked();
+  const filterIntegrations = (item: string) => {
+    return integrationsLinked.some((title) => title === item);
+  };
   return (
-    <main className="w-full items-center justify-center flex">
+    <main className="w-full items-center justify-center flex flex-col space-y-12">
       <div className="portfolio__integrationGrid_wrapper">
         {Integrations.filter(
           (item) =>
@@ -17,6 +21,7 @@ function PortfolioSection() {
           <IntegrationItem key={integration.id} item={integration} />
         ))}
       </div>
+      {filterIntegrations("github") && <GITHUB />}
     </main>
   );
 }

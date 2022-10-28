@@ -35,7 +35,7 @@ export default function Integration() {
 
     if (typeof integration === "string") {
       // to check on the dash if integration linked or not.
-      
+
       await updateDoc(doc(db, "users", usermail), {
         [integration]: true,
       });
