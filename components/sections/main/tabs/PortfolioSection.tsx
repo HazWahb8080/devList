@@ -2,12 +2,18 @@ import React, { useState } from "react";
 import Modal from "../../../../designSystem/modal/Modal";
 import { Integrations } from "../../../../utils/db";
 import { useRouter } from "next/router";
+import { CheckIntegrationLinked } from "../../../../utils/CheckIntegrationLinked";
 
 function PortfolioSection() {
+  // checking what integrations linked.
+  const { integrationsLinked } = CheckIntegrationLinked();
   return (
     <main className="w-full items-center justify-center flex">
       <div className="portfolio__integrationGrid_wrapper">
-        {Integrations.map((integration) => (
+        {Integrations.filter(
+          (item) =>
+            item.title !== integrationsLinked.find((t) => t === item.title)
+        ).map((integration) => (
           <IntegrationItem key={integration.id} item={integration} />
         ))}
       </div>

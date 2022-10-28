@@ -32,7 +32,10 @@ export default function Integration() {
     await setDoc(doc(docRef, `${integration}`), {
       data: data.result,
     });
+
     if (typeof integration === "string") {
+      // to check on the dash if integration linked or not.
+      
       await updateDoc(doc(db, "users", usermail), {
         [integration]: true,
       });
