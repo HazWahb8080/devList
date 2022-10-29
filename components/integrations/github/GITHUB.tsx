@@ -1,13 +1,14 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { Suspense, useEffect, useState } from "react";
 import { ShieldCheckIcon, TrashIcon } from "@heroicons/react/24/outline";
-import { CopyIcon, GitHubLogoIcon, StarIcon } from "@radix-ui/react-icons";
+import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import { useSession } from "next-auth/react";
-import { db } from "../../firebase";
+import { db } from "../../../firebase";
 import { getDocs, collection } from "firebase/firestore";
-import { RepoLanguages } from "../../utils/db";
 import { useDispatch, useSelector } from "react-redux";
-import { getGithubRepos } from "../../slices/githubReposSlice";
-import { RootState } from "../../store";
+import { getGithubRepos } from "../../../slices/githubReposSlice";
+import { RootState } from "../../../store";
+import Repo from "./Repo";
 
 function GITHUB() {
   const [loading, setLoading] = useState(false);
@@ -70,36 +71,3 @@ function GITHUB() {
 }
 
 export default GITHUB;
-
-export const Repo = ({ repo }) => {
-  return (
-    <div className="repo__wrapper group">
-      <span className="repo__wrapper_item ">
-        <h1 className="w-full text-left">{repo.name}</h1>
-        <span className="flex space-x-2 w-full items-center justify-end">
-          <RepoIconFilter l={repo.language} />
-          <p className="self-center">{repo.language}</p>
-        </span>
-      </span>
-      <div className="w-full py-1 border-t border-black/10 group-hover:border-black/50 smooth" />
-      <span className="w-full items-start justify-start flex px-2 space-x-2 ">
-        {/* forks */}
-        <span className="flex space-x-1 items-center justify-center">
-          <CopyIcon className="icon h-4 w-4" />
-          <p className="self-center">{repo.forks}</p>
-        </span>
-        {/* stars */}
-        <span className="flex space-x-1 items-center justify-center">
-          <StarIcon className="icon h-4 w-4" />
-          <p className="self-center">{repo.forks}</p>
-        </span>
-      </span>
-    </div>
-  );
-};
-
-export const RepoIconFilter = ({ l }) => {
-  let language = RepoLanguages.find((item) => item.title === l);
-  if (language) return <span className="">{language.icon}</span>;
-  return <></>;
-};

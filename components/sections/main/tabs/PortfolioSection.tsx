@@ -3,7 +3,7 @@ import Modal from "../../../shared/modal/Modal";
 import { Integrations } from "../../../../utils/db";
 import { useRouter } from "next/router";
 import { CheckIntegrationLinked } from "../../../../utils/CheckIntegrationLinked";
-import GITHUB from "../../../integrations/GITHUB";
+import GITHUB from "../../../integrations/github/GITHUB";
 
 function PortfolioSection() {
   // checking what integrations linked.
