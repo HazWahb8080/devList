@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { DocumentData } from "firebase/firestore";
 
 export interface ReposDetails {
-  value: [];
+  value: DocumentData[];
 }
 
 const initialState: ReposDetails = {

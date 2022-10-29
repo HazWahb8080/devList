@@ -4,7 +4,7 @@ import { CopyIcon, GitHubLogoIcon, StarIcon } from "@radix-ui/react-icons";
 import { useSession } from "next-auth/react";
 import { db } from "../../firebase";
 import { getDocs, collection } from "firebase/firestore";
-import { Integrations, RepoLanguages } from "../../utils/db";
+import { RepoLanguages } from "../../utils/db";
 import { useDispatch, useSelector } from "react-redux";
 import { getGithubRepos } from "../../slices/githubReposSlice";
 import { RootState } from "../../store";
