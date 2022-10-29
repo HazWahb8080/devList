@@ -10,7 +10,7 @@ import { getGithubRepos } from "../../../slices/githubReposSlice";
 import { RootState } from "../../../store";
 import Repo from "./Repo";
 
-function GITHUB() {
+export const GITHUB = () => {
   const [loading, setLoading] = useState(false);
   const { data: session } = useSession();
   const usermail = session?.user?.email;
@@ -68,6 +68,4 @@ function GITHUB() {
       </Suspense>
     </main>
   );
-}
-
-export default GITHUB;
+};

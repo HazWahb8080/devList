@@ -3,17 +3,22 @@ import Modal from "../../../shared/modal/Modal";
 import { Integrations } from "../../../../utils/db";
 import { useRouter } from "next/router";
 import { CheckIntegrationLinked } from "../../../../utils/CheckIntegrationLinked";
-import GITHUB from "../../../integrations/github/GITHUB";
-
+import dynamic from "next/dynamic";
+const GITHUB = dynamic(() =>
+  import("../../../integrations/github/GITHUB").then((mod) => mod.GITHUB)
+);
 function PortfolioSection() {
   // checking what integrations linked.
   const check = useCallback(() => {
     return CheckIntegrationLinked();
   }, []);
   const { integrationsLinked } = check();
-  const filterIntegrations = (item: string) => {
-    return integrationsLinked.some((title: string) => title === item);
-  };
+  const filterIntegrations = useCallback(
+    (item: string) => () => {
+      return integrationsLinked.some((title: string) => title === item);
+    },
+    []
+  );
   return (
     <main className="w-full items-center justify-center flex flex-col space-y-12">
       <div className="portfolio__integrationGrid_wrapper">
