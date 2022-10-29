@@ -25,7 +25,7 @@ export const GITHUB = () => {
       const reposData = await getDocs(
         collection(db, "users", usermail, "integrations", "github", "repos")
       );
-      dispatch(getGithubRepos(reposData.docs));
+      await dispatch(getGithubRepos(reposData.docs));
       setLoading(false);
     };
     fetchGithubRepos();
@@ -44,27 +44,25 @@ export const GITHUB = () => {
       </div>
       {/* repos */}
       <Suspense fallback={<h1>loading...</h1>}>
-        {repos.length > 0 && (
-          <>
-            <div className="w-full h-full grid grid-cols-1 lg:grid-cols-2 gap-4">
-              {repos.slice(0, reposCount).map((repo) => (
-                <Repo key={repo.data().repo.id} repo={repo.data().repo} />
-              ))}
-            </div>
-            <span className="w-full items-center justify-center flex  pt-6">
-              <button
-                className="btn py-1.5"
-                onClick={() =>
-                  repos.length <= reposCount
-                    ? setReposCount((curr) => 4)
-                    : setReposCount((curr) => curr + 4)
-                }
-              >
-                {repos.length <= reposCount ? " show less" : "show more"}
-              </button>
-            </span>
-          </>
-        )}
+        <>
+          <div className="w-full h-full grid grid-cols-1 lg:grid-cols-2 gap-4">
+            {repos.slice(0, reposCount).map((repo) => (
+              <Repo key={repo.data().repo.id} repo={repo.data().repo} />
+            ))}
+          </div>
+          <span className="w-full items-center justify-center flex  pt-6">
+            <button
+              className="btn py-1.5"
+              onClick={() =>
+                repos.length <= reposCount
+                  ? setReposCount((curr) => 4)
+                  : setReposCount((curr) => curr + 4)
+              }
+            >
+              {repos.length <= reposCount ? " show less" : "show more"}
+            </button>
+          </span>
+        </>
       </Suspense>
     </main>
   );

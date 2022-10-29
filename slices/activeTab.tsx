@@ -3,7 +3,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 export enum Tabs {
   portfolio = "Portfolio",
-  resume= "Resume",
+  resume = "Resume",
 }
 
 export interface ActiveTabSlice {
