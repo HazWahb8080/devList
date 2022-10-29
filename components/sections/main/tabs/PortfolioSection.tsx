@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import Modal from "../../../../designSystem/modal/Modal";
+import React, { useState, useCallback } from "react";
+import Modal from "../../../../shared/modal/Modal";
 import { Integrations } from "../../../../utils/db";
 import { useRouter } from "next/router";
 import { CheckIntegrationLinked } from "../../../../utils/CheckIntegrationLinked";
@@ -11,6 +11,7 @@ function PortfolioSection() {
   const filterIntegrations = (item: string) => {
     return integrationsLinked.some((title) => title === item);
   };
+
   return (
     <main className="w-full items-center justify-center flex flex-col space-y-12">
       <div className="portfolio__integrationGrid_wrapper">
@@ -21,6 +22,7 @@ function PortfolioSection() {
           <IntegrationItem key={integration.id} item={integration} />
         ))}
       </div>
+      <div className="w-full py-1 border-t border-black/10" />
       {filterIntegrations("github") && <GITHUB />}
     </main>
   );

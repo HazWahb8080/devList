@@ -30,3 +30,5 @@ export const userDetailsSlice = createSlice({
 export const { getUserDetails } = userDetailsSlice.actions;
 
 export default userDetailsSlice.reducer;
+
+

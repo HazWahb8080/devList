@@ -14,7 +14,7 @@ function MainBuilder({ session }) {
   return (
     <main className="col-span-9 w-full border-r border-black/10 h-full">
       {/* top section */}
-      <GeneralSection session={session} />
+      {/* <GeneralSection session={session} /> */}
       <span className=" lg:px-12 w-full pt-2 border-y border-black/10 items-center justify-start flex space-x-4">
         {tabs.map((tab) => (
           <h2

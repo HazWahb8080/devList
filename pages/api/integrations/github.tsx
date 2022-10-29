@@ -28,13 +28,16 @@ export default async function handler(
       },
     });
     const result = await userData.json();
-    const Repos = await fetch("https://api.github.com/user/repos", {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${response.access_token}`,
-        Accept: "application/vnd.github+json",
-      },
-    });
+    const Repos = await fetch(
+      "https://api.github.com/user/repos?visibility=public&per_page=100",
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${response.access_token}`,
+          Accept: "application/vnd.github+json",
+        },
+      }
+    );
     const RepoResponse = await Repos.json();
     return res.status(200).send({ result, RepoResponse });
   } catch (err) {

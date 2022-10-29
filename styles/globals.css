@@ -25,7 +25,7 @@ html {
     @apply rounded-full h-7 w-7 object-cover object-center;
   }
   .header__container {
-    @apply  bg-white w-full py-2 px-4 items-start justify-between
+    @apply bg-white w-full py-2 px-4 items-start justify-between
     flex sticky top-0 shadow-sm shadow-gray-100 filter backdrop-blur-lg bg-opacity-50;
   }
   .icon__wrapper {
@@ -43,5 +43,11 @@ html {
   .portfolio__integrations__item_wrapper {
     @apply smooth cursor-pointer duration-150 py-4 w-full items-center justify-center space-x-2 flex px-2 border
      border-black/10 hover:border-black/50 rounded-md hover:shadow-lg shadow-gray-200;
+  }
+  .verified__icon {
+    @apply self-center h-6 w-6 cursor-pointer stroke-green-800 fill-green-400 smooth hover:stroke-black;
+  }
+  .remove__icon {
+    @apply self-center h-5 w-5 stroke-red-600 smooth hover:scale-110 cursor-pointer;
   }
 }

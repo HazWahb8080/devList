@@ -41,9 +41,9 @@ export default function Integration() {
       });
     }
     if (integration === "github") {
-      data.RepoResponse.forEach(async (repo: any) => {
+      data.RepoResponse.forEach(async (repoData: any) => {
         await addDoc(collection(docRef, `${integration}`, "repos"), {
-          [repo.name]: repo,
+          repo: repoData,
         });
       });
     }

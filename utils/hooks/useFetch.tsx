@@ -1,10 +1,12 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { db } from "../../firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, getDocs, collection } from "firebase/firestore";
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState } from "../../store";
 import { getUserDetails } from "../../slices/userDetailsSlice";
+import { getGithubRepos } from "../../slices/githubReposSlice";
 
 function useFetch(type = "" as string) {
   const { data: session } = useSession();
