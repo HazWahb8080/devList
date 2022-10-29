@@ -25,7 +25,7 @@ function DashboardPage() {
         </Head>
       )}
       <Header session={session} />
-      <div className="grid grid-cols-12 place-items-start w-full min-h-screen">
+      <div className="lg:grid grid-cols-12 place-items-start w-full min-h-screen">
         <ProfileCompletion />
         <MainBuilder session={session} />
         <div className="col-span-1 py-2 w-full h-full"></div>

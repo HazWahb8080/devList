@@ -1,13 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userDetailsReducer from "./slices/userDetailsSlice";
 import activeTabReducer from "./slices/activeTab";
-import repoDetailsReducer from "./slices/githubReposSlice"
+import repoDetailsReducer from "./slices/githubReposSlice";
+import linkedIntegrationReducer from "./slices/linkedIntegrationsSlice" 
 
 export const store = configureStore({
   reducer: {
     userDetails: userDetailsReducer,
     activeTab: activeTabReducer,
     repoDetails: repoDetailsReducer,
+    linkedIntegration: linkedIntegrationReducer,
   },
 });
 

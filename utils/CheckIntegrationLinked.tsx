@@ -1,26 +1,31 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { Integrations } from "./db";
 import { useSession } from "next-auth/react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../store";
+import { addIntegrationLinked } from "../slices/linkedIntegrationsSlice";
 
 export function CheckIntegrationLinked() {
   const { data: session } = useSession();
   const usermail = session?.user?.email;
-  const [integrationsLinked, setIntegrationsLinked] = useState<string[]>([]);
-  const MappedIntegrationTitles = () => {
+  const dispatch = useDispatch();
+  const MappedIntegrationTitles = useMemo(() => {
     return Integrations.map((intgr) => intgr.title); //string[]
-  };
+  }, []);
+  const integrationsLinked = useSelector(
+    (state: RootState) => state.linkedIntegration.value
+  );
 
   useEffect(() => {
     if (!session) return;
     const getIntegrationsLinked = async () => {
       let ref = doc(db, "users", usermail);
       let docDetails = await getDoc(ref);
-      MappedIntegrationTitles().forEach((title) => {
+      MappedIntegrationTitles.forEach((title) => {
         Object.keys(docDetails.data()).forEach((key) => {
-          if (key === title)
-            setIntegrationsLinked([...integrationsLinked, key]);
+          if (key === title) dispatch(addIntegrationLinked(key));
         });
       });
     };

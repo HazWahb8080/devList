@@ -1,5 +1,5 @@
 import React from "react";
-import { Integration, Integrations } from "../../utils/db";
+import { Integration, Integrations } from "../../../utils/db";
 import {
   Dialog,
   DialogClose,
@@ -14,7 +14,7 @@ import Link from "next/link";
 
 import { Cross2Icon } from "@radix-ui/react-icons";
 import { Input, Label, Fieldset, Button, Flex, IconButton } from "../styles";
-import { useFetchData } from "../../utils/hooks/useFetchData";
+import { useFetchData } from "../../../utils/hooks/useFetchData";
 
 interface Props {
   open: boolean;

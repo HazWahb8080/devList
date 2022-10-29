@@ -1,3 +1,4 @@
+import { CodeIcon } from "@radix-ui/react-icons";
 import { SVGsIntegrations } from "./svgs";
 
 export const tags = [
@@ -82,4 +83,28 @@ export interface Integration {
   icon: JSX.Element;
   desc: string;
   authorizeLink: string;
+}
+
+export const RepoLanguages: Language[] = [
+  {
+    title: "TypeScript",
+    icon: <CodeIcon className="w-4 h-4 self-center" />,
+  },
+  {
+    title: "JavaScript",
+    icon: <CodeIcon className="w-4 h-4 self-center" />,
+  },
+  {
+    title: "SCSS",
+    icon: <CodeIcon className="w-4 h-4 self-center" />,
+  },
+  {
+    title: "CSS",
+    icon: <CodeIcon className="w-4 h-4 self-center" />,
+  },
+];
+
+export interface Language {
+  title: string;
+  icon: JSX.Element;
 }

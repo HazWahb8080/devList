@@ -50,4 +50,11 @@ html {
   .remove__icon {
     @apply self-center h-5 w-5 stroke-red-600 smooth hover:scale-110 cursor-pointer;
   }
+  .repo__wrapper {
+    @apply w-full flex flex-col items-center justify-center border border-black/10 rounded-md py-6
+     cursor-pointer smooth hover:border-black/50
+  }
+  .repo__wrapper_item {
+    @apply w-full items-center justify-between flex px-2 pb-4 
+  }
 }

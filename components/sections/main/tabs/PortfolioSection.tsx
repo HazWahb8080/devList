@@ -1,5 +1,5 @@
-import React, { useState, useCallback } from "react";
-import Modal from "../../../../shared/modal/Modal";
+import React, { useState, useCallback, Suspense } from "react";
+import Modal from "../../../shared/modal/Modal";
 import { Integrations } from "../../../../utils/db";
 import { useRouter } from "next/router";
 import { CheckIntegrationLinked } from "../../../../utils/CheckIntegrationLinked";
@@ -7,17 +7,19 @@ import GITHUB from "../../../integrations/GITHUB";
 
 function PortfolioSection() {
   // checking what integrations linked.
-  const { integrationsLinked } = CheckIntegrationLinked();
+  const check = useCallback(() => {
+    return CheckIntegrationLinked();
+  }, []);
+  const { integrationsLinked } = check();
   const filterIntegrations = (item: string) => {
-    return integrationsLinked.some((title) => title === item);
+    return integrationsLinked.some((title: string) => title === item);
   };
-
   return (
     <main className="w-full items-center justify-center flex flex-col space-y-12">
       <div className="portfolio__integrationGrid_wrapper">
         {Integrations.filter(
           (item) =>
-            item.title !== integrationsLinked.find((t) => t === item.title)
+            item.title !== integrationsLinked?.find((t) => t === item.title)
         ).map((integration) => (
           <IntegrationItem key={integration.id} item={integration} />
         ))}
