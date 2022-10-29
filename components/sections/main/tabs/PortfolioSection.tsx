@@ -30,7 +30,9 @@ function PortfolioSection() {
         ))}
       </div>
       <div className="w-full py-1 border-t border-black/10" />
-      {filterIntegrations("github") && <GITHUB />}
+      <Suspense fallback={`loading...`}>
+        {filterIntegrations("github") && <GITHUB />}
+      </Suspense>
     </main>
   );
 }

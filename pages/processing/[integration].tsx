@@ -1,7 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
-import { addDoc, doc, collection, setDoc, updateDoc } from "firebase/firestore";
+import {
+  addDoc,
+  doc,
+  collection,
+  setDoc,
+  updateDoc,
+  DocumentData,
+} from "firebase/firestore";
 import { db } from "../../firebase";
 import { useSession } from "next-auth/react";
 
@@ -35,13 +42,12 @@ export default function Integration() {
 
     if (typeof integration === "string") {
       // to check on the dash if integration linked or not.
-
       await updateDoc(doc(db, "users", usermail), {
         [integration]: true,
       });
     }
     if (integration === "github") {
-      data.RepoResponse.forEach(async (repoData: any) => {
+      data.RepoResponse.forEach(async (repoData: DocumentData) => {
         await addDoc(collection(docRef, `${integration}`, "repos"), {
           repo: repoData,
         });
