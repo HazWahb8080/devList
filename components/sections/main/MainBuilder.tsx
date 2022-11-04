@@ -6,7 +6,7 @@ import GeneralSection from "./GeneralSection";
 import PortfolioSection from "./tabs/PortfolioSection";
 import ResumeSection from "./tabs/ResumeSection";
 
-function MainBuilder({ session }) {
+export function MainBuilder({ session }) {
   const activeTab = useSelector((state: RootState) => state.activeTab.value);
   const dispatch = useDispatch();
 
@@ -30,5 +30,3 @@ function MainBuilder({ session }) {
     </main>
   );
 }
-
-export default MainBuilder;

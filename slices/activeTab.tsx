@@ -26,5 +26,4 @@ export const ActiveTabSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const { activeTabIs } = ActiveTabSlice.actions;
-
 export default ActiveTabSlice.reducer;

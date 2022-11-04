@@ -1,20 +1,32 @@
-import React, { useEffect } from "react";
+import React, { Suspense, useEffect } from "react";
 import Header from "../components/header/Header";
 import { useSession } from "next-auth/react";
 import ProfileCompletion from "../components/sections/ProfileCompletion";
-import MainBuilder from "../components/sections/main/MainBuilder";
 import Head from "next/head";
 import { RootState } from "../store";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
+const MainBuilder = dynamic(
+  () =>
+    import("../components/sections/main/MainBuilder").then(
+      (mod) => mod.MainBuilder
+    ),
+  {
+    suspense: true,
+    ssr: false,
+  }
+);
 
 function DashboardPage() {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession({
+    required: true,
+    onUnauthenticated() {
+      router.push("/auth/signin");
+    },
+  });
   const router = useRouter();
   const result = useSelector((state: RootState) => state.userDetails.value);
-  useEffect(() => {
-    if (status === "unauthenticated") router.push("/auth/signin");
-  }, [session]);
   return (
     <main className="w-full min-h-screen items-start justify-start flex flex-col ">
       {Object.values(result).some((value) => value !== "") && (
@@ -27,7 +39,10 @@ function DashboardPage() {
       <Header session={session} />
       <div className="lg:grid grid-cols-12 place-items-start w-full min-h-screen">
         <ProfileCompletion />
-        <MainBuilder session={session} />
+        <Suspense fallback={<h1>loading...</h1>}>
+          <MainBuilder session={session} />
+        </Suspense>
+
         <div className="col-span-1 py-2 w-full h-full"></div>
       </div>
     </main>

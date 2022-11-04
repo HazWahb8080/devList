@@ -15,9 +15,10 @@ function PortfolioSection() {
   const { integrationsLinked } = check();
   const filterIntegrations = useCallback(
     (item: string) => () => {
+      if (!item) return;
       return integrationsLinked.some((title: string) => title === item);
     },
-    []
+    [integrationsLinked]
   );
   return (
     <main className="w-full items-center justify-center flex flex-col space-y-12">

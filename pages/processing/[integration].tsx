@@ -22,6 +22,9 @@ export default function Integration() {
     const codeData = {
       code,
     };
+    const controller = new AbortController();
+    const signal = controller.signal;
+
     // sending the code to get the accesstoken and perform further actions
     fetch(`/api/integrations/${integration}`, {
       method: "post",
@@ -29,9 +32,13 @@ export default function Integration() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(codeData),
+      signal,
     })
       .then((res) => res.json())
       .then((data) => fireToDb(data));
+    return () => {
+      controller.abort();
+    };
   }, [code, integration, usermail]);
 
   const fireToDb = async (data: any) => {
@@ -41,7 +48,7 @@ export default function Integration() {
     });
 
     if (typeof integration === "string") {
-      // to check on the dash if integration linked or not.
+      // will use this to check on the dashboard if the  integration linked or not.
       await updateDoc(doc(db, "users", usermail), {
         [integration]: true,
       });
