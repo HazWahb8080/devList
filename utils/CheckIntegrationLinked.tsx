@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { Integrations } from "./db";
 import { useSession } from "next-auth/react";
 import { doc, getDoc } from "firebase/firestore";

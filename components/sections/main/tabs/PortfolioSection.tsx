@@ -13,13 +13,10 @@ function PortfolioSection() {
     return CheckIntegrationLinked();
   }, []);
   const { integrationsLinked } = check();
-  const filterIntegrations = useCallback(
-    (item: string) => () => {
-      if (!item) return;
-      return integrationsLinked.some((title: string) => title === item);
-    },
-    [integrationsLinked]
-  );
+  const filterIntegrations = (item: string) => {
+    if (!item) return;
+    return integrationsLinked.some((title: string) => title === item);
+  };
   return (
     <main className="w-full items-center justify-center flex flex-col space-y-12">
       <div className="portfolio__integrationGrid_wrapper">

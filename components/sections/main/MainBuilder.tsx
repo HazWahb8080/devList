@@ -1,4 +1,4 @@
-import React from "react";
+import React, { startTransition, Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { activeTabIs } from "../../../slices/activeTab";
 import { RootState } from "../../../store";
@@ -11,22 +11,29 @@ export function MainBuilder({ session }) {
   const dispatch = useDispatch();
 
   const tabs = ["Portfolio", "Resume"];
+  const handleTab = (tab: string) => {
+    startTransition(() => {
+      dispatch(activeTabIs(tab as string));
+    });
+  };
   return (
     <main className="col-span-9 w-full border-r border-black/10 h-full">
       {/* top section */}
-      {/* <GeneralSection session={session} /> */}
+      <GeneralSection session={session} />
       <span className=" lg:px-12 w-full pt-2 border-y border-black/10 items-center justify-start flex space-x-4">
         {tabs.map((tab) => (
           <h2
             key={tab}
-            onClick={() => dispatch(activeTabIs(tab as string))}
+            onClick={() => handleTab(tab)}
             className={`${activeTab === tab ? "tab--active" : "tab"} `}
           >
             {tab}
           </h2>
         ))}
       </span>
-      {activeTab === "Portfolio" ? <PortfolioSection /> : <ResumeSection />}
+      <Suspense fallback={<p>loading...</p>}>
+        {activeTab === "Portfolio" ? <PortfolioSection /> : <ResumeSection />}
+      </Suspense>
     </main>
   );
 }
