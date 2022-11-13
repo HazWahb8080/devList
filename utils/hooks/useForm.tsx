@@ -3,23 +3,14 @@ interface User {
   firstName: string;
   lastName: string;
   description: string;
-  tags: string[];
 }
 
-function useForm(initialValue: User, ref: React.RefObject<HTMLSelectElement>) {
+function useForm(initialValue: User) {
   const [formData, setFormData] = useState(initialValue);
   const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    e.target.name === "tags"
-      ? (setFormData((curr) => ({
-          ...curr,
-          [e.target.name]: [...curr.tags, e.target.value],
-        })),
-        ref.current.value === "")
-      : setFormData((curr) => ({ ...curr, [e.target.name]: e.target.value }));
+    setFormData((curr) => ({ ...curr, [e.target.name]: e.target.value }));
   };
   return { formData, handleChange };
 }
