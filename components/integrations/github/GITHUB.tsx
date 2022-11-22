@@ -56,7 +56,7 @@ export const GITHUB = () => {
           github: deleteField(),
         });
         dispatch(removeIntegration("github"));
-        alert("github removed");
+        alert("  removed");
       });
   };
   return (
