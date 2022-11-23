@@ -38,7 +38,11 @@ export const GITHUB = () => {
       const reposData = await getDocs(
         collection(db, "users", usermail, "integrations", "github", "repos")
       );
-      dispatch(getGithubRepos(reposData.docs));
+      const repoFiltered = reposData.docs.filter(
+        (repo) =>
+          repo.data().repo.fork === false && repo.data().repo.private === false
+      );
+      dispatch(getGithubRepos(repoFiltered));
       setLoading(false);
     };
     fetchGithubRepos();
