@@ -23,11 +23,7 @@ export const Integrations: Integrations = [
     title: "medium",
     desc: "Connect your Medium blog and showcase your articles.",
     icon: SVGsIntegrations.medium,
-    authorizeLink: `https://medium.com/m/oauth/authorize?client_id=32975313ad33
-    &scope=basicProfile,publishPost
-    &state=DEVLIST101
-    &response_type=code
-    &redirect_uri=https://devlist.hazem.codes/processing/medium`,
+    authorizeLink: `https://medium.com/m/oauth/authorize?client_id=32975313ad33&scope=basicProfile,publishPost&state=DEVLIST101&response_type=code&redirect_uri=https://devlist.hazem.codes/processing/medium`,
   },
   {
     id: 3,

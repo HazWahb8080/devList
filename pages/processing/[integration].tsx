@@ -35,7 +35,7 @@ export default function Integration() {
       signal,
     })
       .then((res) => res.json())
-      .then((data) => fireToDb(data));
+      .then((data) => console.log(data)); //fireToDb(data)
     return () => {
       controller.abort();
     };
