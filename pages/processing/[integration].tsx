@@ -19,9 +19,10 @@ export default function Integration() {
   const usermail = session?.user?.email;
   useEffect(() => {
     if (!code || !integration || !usermail) return;
-    const codeData = {
+    var codeData = {
       code,
     };
+
     const controller = new AbortController();
     const signal = controller.signal;
 

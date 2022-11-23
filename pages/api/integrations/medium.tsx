@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 // we are using github aouth App istead of using public github APIs :
 // compliance issues and mainly to make it maintanable at scale in case we need to perform
 // more actions.
+var bodyParser = require("body-parser");
 
 export default async function handler(
   req: NextApiRequest,
@@ -10,13 +11,9 @@ export default async function handler(
   try {
     // sending the code to get the access token
     const data = await fetch(
-      `https://api.medium.com/v1/token?code=${req.body.code}&client_id=32975313ad33&client_secret=00eed9e451fa43499c57df440df0790cf5f9ee68&grant_type=authorization_code&redirect_uri=https://devlist.hazem.codes/processing/medium`,
+      `https://api.medium.com/v1/tokens?code=${req.body.code}&client_id=32975313ad33&client_secret=00eed9e451fa43499c57df440df0790cf5f9ee68&redirect_uri=https://devlist.hazem.codes/processing/medium`,
       {
         method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-          Accept: "application/json",
-        },
       }
     );
     const response = await data.json();
