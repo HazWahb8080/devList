@@ -11,13 +11,11 @@ export default async function handler(
   try {
     // sending the code to get the access token
     const data = await fetch(
-      `https://medium2.p.rapidapi.com/user/id_for/${req.body.username}`,
+      `https://dribbble.com/oauth/authorize?client_id=7e1b4dc2b11ca8157f6e91fed33d545d4b0844b60eabf752323f142cbb285972&redirect_uri=https://devlist.hazem.code/processing/dribbble`,
       {
         method: "GET",
         headers: {
-          "X-RapidAPI-Key":
-            "c72d5f7031mshf5f7a1824e385d2p12e2a3jsn56c7215773f4",
-          "X-RapidAPI-Host": "medium2.p.rapidapi.com",
+          "Content-Type": "application/json",
         },
       }
     );
